@@ -14,26 +14,44 @@ def pick_target_number(low=LOWEST_NUMBER, high=HIGHEST_NUMBER):
     return random.randint(low, high)
 
 def ask_for_guess():
-    #prompt user for guess input
-    pass
+    while True:
+        user_guess = input(f"Guess a number within the range {LOWEST_NUMBER} and {HIGHEST_NUMBER} inclusive or press 'q' to quit: ")
+        result = validate_guess(user_guess)
+        
+        if result == 'q':
+            return 'q'
+        elif result is not None:
+            return result
 
-def evaluate_guess(guess, target):
-    #evaluate_guess checks if guess is correct, too high, or too low
-    pass
+def validate_guess(user_guess, low=LOWEST_NUMBER, high=HIGHEST_NUMBER):
+    if user_guess.lower() == 'q':
+        return 'q'
+    try:
+        validated_guess = int(user_guess)
+    except ValueError: 
+        print("Invalid input.")
+        return None
+    
+    if not low <= validated_guess <= high:
+        print("Out of bounds.")
+    else:
+        return validated_guess
+    
 
 def reset_game():
     #reset game variables to start a new game
     pass
 
 def end_game():
-    pass
+    pass    
 
 def play():
+    ask_for_guess()
     #initialize
     #cycle through guesses
     #end or reset game
-    pass
+    #if quess is q, call end_game
+    
 
 if __name__ == "__main__":
-    # ...call play
     play()
