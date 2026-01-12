@@ -13,17 +13,17 @@ MAX_GUESSES = (5)
 def pick_target_number(low=LOWEST_NUMBER, high=HIGHEST_NUMBER):
     return random.randint(low, high)
 
-def ask_for_guess():
+def ask_for_guess(target):
     while True:
         user_guess = input(f"Guess a number within the range {LOWEST_NUMBER} and {HIGHEST_NUMBER} inclusive or press 'q' to quit: ")
-        result = validate_guess(user_guess)
+        result = validate_guess(user_guess, target)
         
         if result == 'q':
             return 'q'
         elif result is not None:
             return result
 
-def validate_guess(user_guess, low=LOWEST_NUMBER, high=HIGHEST_NUMBER):
+def validate_guess(user_guess, target, low=LOWEST_NUMBER, high=HIGHEST_NUMBER):
     if user_guess.lower() == 'q':
         return 'q'
     try:
@@ -31,27 +31,43 @@ def validate_guess(user_guess, low=LOWEST_NUMBER, high=HIGHEST_NUMBER):
     except ValueError: 
         print("Invalid input.")
         return None
-    
     if not low <= validated_guess <= high:
         print("Out of bounds.")
-    else:
+    if validated_guess < target:
+        print("Higher.")
         return validated_guess
+    if validated_guess > target:
+        print("Lower.")
+        return validated_guess
+    if validated_guess == target:
+        print("Correct!")
+        return validated_guess
+
+def end_game_message(message="Thanks for playing! Goodbye."):
+    print(message)
     
+def reset_game(current_guesses):
+    current_guesses = MAX_GUESSES
+    return current_guesses
 
-def reset_game():
-    #reset game variables to start a new game
-    pass
-
-def end_game():
-    pass    
 
 def play():
-    ask_for_guess()
-    #initialize
-    #cycle through guesses
-    #end or reset game
-    #if quess is q, call end_game
-    
+    target = pick_target_number()
+    remaining_guesses = MAX_GUESSES
+
+    while remaining_guesses > 0:
+        guess = ask_for_guess(target)
+        if guess == 'q':
+            end_game_message()
+            return
+        if guess == target:
+            end_game_message("Congratulations! You've guessed the correct number!")
+            return
+        remaining_guesses -= 1
+
+    end_game_message("Out of guesses. Game over.")
 
 if __name__ == "__main__":
     play()
+
+
