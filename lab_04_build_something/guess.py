@@ -14,25 +14,22 @@ def pick_target_number(low=LOWEST_NUMBER, high=HIGHEST_NUMBER):
     return random.randint(low, high)
 
 def ask_for_guess(target):
-    while True:
         user_guess = input(f"Guess a number within the range {LOWEST_NUMBER} and {HIGHEST_NUMBER} inclusive or press 'q' to quit: ")
-        result = validate_guess(user_guess, target)
-        
-        if result == 'q':
-            return 'q'
-        elif result is not None:
-            return result
+        return validate_guess(user_guess, target)
 
 def validate_guess(user_guess, target, low=LOWEST_NUMBER, high=HIGHEST_NUMBER):
-    if user_guess.lower() == 'q':
-        return 'q'
+    if isinstance(user_guess, str) and user_guess.lower() == 'q':
+            return 'q'
+
     try:
         validated_guess = int(user_guess)
-    except ValueError: 
-        print("Invalid input.")
+    except (ValueError, TypeError):
+        print("Invalid input. Integers only.")
         return None
+
     if not low <= validated_guess <= high:
         print("Out of bounds.")
+        return None
     if validated_guess < target:
         print("Higher.")
         return validated_guess
@@ -45,27 +42,24 @@ def validate_guess(user_guess, target, low=LOWEST_NUMBER, high=HIGHEST_NUMBER):
 
 def end_game_message(message="Thanks for playing! Goodbye."):
     print(message)
-    
-def reset_game(current_guesses):
-    current_guesses = MAX_GUESSES
-    return current_guesses
-
 
 def play():
     target = pick_target_number()
     remaining_guesses = MAX_GUESSES
 
-    while remaining_guesses > 0:
+    while remaining_guesses >= 1:
+        remaining_guesses -= 1
         guess = ask_for_guess(target)
+        
         if guess == 'q':
             end_game_message()
             return
+
         if guess == target:
             end_game_message("Congratulations! You've guessed the correct number!")
             return
-        remaining_guesses -= 1
 
-    end_game_message("Out of guesses. Game over.")
+    end_game_message("Out of guesses. Game over. The number was {TARGET}.")
 
 if __name__ == "__main__":
     play()

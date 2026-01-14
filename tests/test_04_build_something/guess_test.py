@@ -4,11 +4,14 @@ def test_pick_target_number():
     number = guess.pick_target_number()
     assert guess.LOWEST_NUMBER <= number <= guess.HIGHEST_NUMBER
 
-def test_validate_guess_valid():
-    assert guess.validate_guess('50') == 50
-    assert guess.validate_guess('dog') == None
-    assert guess.validate_guess('0') == None
-    assert guess.validate_guess('101') == None
-    assert guess.validate_guess('q') == 'q'
-    
-
+def test_validate_guess():
+    LOWEST_NUMBER = 0
+    HIGHEST_NUMBER = 100
+    TARGET = 50
+    assert guess.validate_guess('q', TARGET) == 'q'
+    assert guess.validate_guess('dog', TARGET) is None
+    assert guess.validate_guess(TARGET -1, TARGET) == TARGET -1
+    assert guess.validate_guess(TARGET +1, TARGET) == TARGET +1
+    assert guess.validate_guess(LOWEST_NUMBER-1, TARGET) is None
+    assert guess.validate_guess(HIGHEST_NUMBER+1, TARGET) is None
+    assert guess.validate_guess(HIGHEST_NUMBER+1, TARGET) is None
