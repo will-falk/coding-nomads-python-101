@@ -9,8 +9,24 @@ cuteness_provider = DynamicProvider(
 fake = Faker()
 fake.add_provider(cuteness_provider)
 
+def create_cat():
+    name = fake.first_name().lower()
+    color = fake.color_name().lower()
+    age = fake.random_int(min=1, max=19)
+    cuteness = fake.cuteness()
+    
+    cat = {
+        "name": name,
+        "color": color,
+        "age": age,
+        "cuteness": cuteness,
+        "adopted": False
+    }
 
-#initiate array of dictionaries
+    return cat
+
+def create_shelter():
+    pass
 
 # generate some cats (use a random generator?)
 
@@ -24,5 +40,3 @@ fake.add_provider(cuteness_provider)
 
 #front desk ... greet, ask purpose...visit, adopt, drop off, exit
 #effectively a router
-
-
