@@ -1,17 +1,17 @@
 import lab_06_intro_to_programming.cat_shelter as cats
 
-def test_pick_target_number():
-    number = guess.pick_target_number()
-    assert guess.LOWEST_NUMBER <= number <= guess.HIGHEST_NUMBER
-
-def test_validate_guess():
-    LOWEST_NUMBER = 0
-    HIGHEST_NUMBER = 100
-    TARGET = 50
-    assert guess.validate_guess('q', TARGET) == 'q'
-    assert guess.validate_guess('dog', TARGET) is None
-    assert guess.validate_guess(TARGET -1, TARGET) == TARGET -1
-    assert guess.validate_guess(TARGET +1, TARGET) == TARGET +1
-    assert guess.validate_guess(LOWEST_NUMBER-1, TARGET) is None
-    assert guess.validate_guess(HIGHEST_NUMBER+1, TARGET) is None
-    assert guess.validate_guess(HIGHEST_NUMBER+1, TARGET) is None
+def test_create_cat():
+    cat = cats.create_cat()
+    
+    assert set(cat.keys()) == {"name", "color", "age", "cuteness", "adopted"}
+    assert isinstance(cat["name"], str)
+    assert cat["name"] == cat["name"].lower()
+    
+    assert isinstance(cat["color"], str)
+    assert cat["color"] == cat["color"].lower()
+    
+    assert isinstance(cat["age"], int)
+    assert 1 <= cat["age"] <= 19
+    
+    assert cat["adopted"] == False
+    
