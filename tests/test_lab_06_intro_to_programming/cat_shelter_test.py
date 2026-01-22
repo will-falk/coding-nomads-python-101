@@ -14,4 +14,8 @@ def test_create_cat():
     assert 1 <= cat["age"] <= 19
     
     assert cat["adopted"] == False
+
+def test_create_shelter():
+    shelter_size = 5
+    assert len(cats.create_shelter(shelter_size)) == shelter_size
     

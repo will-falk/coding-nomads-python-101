@@ -25,10 +25,12 @@ def create_cat():
 
     return cat
 
-def create_shelter():
-    pass
+def create_shelter(number_cats):
+    shelter = []
+    for x in range(number_cats):
+        shelter.append(create_cat())
+    return shelter
 
-# generate some cats (use a random generator?)
 
 # visit function...says what's available
 
