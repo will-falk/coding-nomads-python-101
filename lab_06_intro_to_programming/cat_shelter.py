@@ -20,7 +20,7 @@ def create_cat():
         "color": color,
         "age": age,
         "cuteness": cuteness,
-        "adopted": False
+        "adoption status": False
     }
 
     return cat
@@ -31,8 +31,16 @@ def create_shelter(number_cats):
         shelter.append(create_cat())
     return shelter
 
+def print_cat(cat):
+    blurb = f"Meet {cat['name']}!"
+    for key in cat.keys():
+        if not key == "name":
+            blurb += f" Their {key} is {cat[key]}."
+    print(blurb)
 
-# visit function...says what's available
+def visit(shelter):
+    for cat in shelter:
+        print_cat(cat)
 
 # adopt function ... updates status as adopted
 
@@ -40,5 +48,6 @@ def create_shelter(number_cats):
 
 # assessment ... assigns characteristics - color, name, age, cuteness
 
-#front desk ... greet, ask purpose...visit, adopt, drop off, exit
+#front desk ... 
+# greet, ask purpose...visit, adopt, drop off, exit
 #effectively a router
