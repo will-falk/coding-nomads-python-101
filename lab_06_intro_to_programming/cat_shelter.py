@@ -45,11 +45,3 @@ def visit(shelter):
 def adopt(shelter, cat):
     shelter.remove(cat)
     return shelter
-
-# drop off function ... receives a new cat
-
-# assessment ... assigns characteristics - color, name, age, cuteness
-
-#front desk ... 
-# greet, ask purpose...visit, adopt, drop off, exit
-#effectively a router
