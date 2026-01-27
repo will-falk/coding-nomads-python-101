@@ -42,7 +42,9 @@ def visit(shelter):
     for cat in shelter:
         print_cat(cat)
 
-# adopt function ... updates status as adopted
+def adopt(shelter, cat):
+    shelter.remove(cat)
+    return shelter
 
 # drop off function ... receives a new cat
 

@@ -24,3 +24,14 @@ def test_print_cat(capsys):
     cats.print_cat(cat)
     captured = capsys.readouterr()
     assert captured.out.startswith("Meet")
+
+def test_adopt():
+    shelter_size = 3
+    original_shelter = [cats.create_cat() for _ in range(shelter_size)]
+    cat_to_adopt = original_shelter[0]
+    new_shelter = cats.adopt(original_shelter, cat_to_adopt)
+    assert len(new_shelter) == shelter_size - 1
+    assert cat_to_adopt not in new_shelter
+    assert original_shelter[0] in new_shelter
+    assert original_shelter[1] in new_shelter
+     
